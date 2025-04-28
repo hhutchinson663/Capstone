@@ -3,10 +3,7 @@ import Base from './base.js';
 import { expect } from '@wdio/globals'
 
 class SavingsCenter extends Base {
-    /**
-     * define selectors using getter methods
-     */
-
+    
     get moreWaysToSaveTitle() {
         return $('//h2[contains(text(),"More Ways to Save")]')
     }

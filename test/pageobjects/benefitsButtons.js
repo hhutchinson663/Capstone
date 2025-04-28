@@ -3,9 +3,6 @@ import Base from './base.js';
 import { expect } from '@wdio/globals'
 
 class BenefitsButtons extends Base {
-    /**
-     * define selectors using getter methods
-     */
    get healthWellnessTab() {
     return $('[id="fusion-tab-health&wellness"]')
    }
