@@ -4,9 +4,6 @@ import { expect } from '@wdio/globals'
 
 class ShopByCategory extends Base {
   
-// selector(string) {
-//   return $(`//*[@data-contentful-field-id="title"][contains(text(),"${string}")]`)
-// }
 buttonSelectors(string) {
   return $(`//div[contains(text(),"${string}")]`)
 }
@@ -15,32 +12,39 @@ headingSelectors(string) {
   return $(`//h1[contains(text(),"${string}")]`)
 }
 
+button = ["Special Buy of the Day", "Special Savings", "Appliances", "Bath & Faucets", "Blinds & Window Treatments", "Building Materials", "Cleaning", "Decor & Furniture", "Electrical", "Flooring & Area Rugs", "Hardware", "Heating & Cooling", "Kitchen", "Lawn & Garden", "Lighting & Ceiling Fans", "Outdoor Living", "Paint", "Plumbing", "Storage & Organization", "Tools"]
 
-// specialBuysSelector(string) {
-//   return $(`//*[contains(text(),"${string}")]`)
-// }
-"Blinds & Window Treatments"
-button = ["Special Buy of the Day", "Special Savings", "Appliances", "Bath & Faucets",  "Building Materials", "Cleaning", "Decor & Furniture", "Electrical", "Flooring & Area Rugs", "Hardware", "Heating & Cooling", "Kitchen", "Lawn & Garden", "Lighting & Ceiling Fans", "Outdoor Living", "Paint", "Plumbing", "Storage & Organization", "Tools"]
-"Window Treatments" 
-heading = ["Special Buy of the Day", "SAVINGS CENTER", "Appliances", "Bath",  "Building Materials", "Cleaning", "Home Decor", "Electrical", "Flooring", "Hardware", "HEATING, VENTING & COOLING", "KITCHEN", "Garden Center", "Lighting", "Outdoors", "Paint", "Plumbing", "Storage and Organization", "Tools"]
+heading = ["Special Buy of the Day", "SAVINGS CENTER", "Appliances", "Bath", "Window Treatments", "Building Materials", "Cleaning", "Home Decor", "Electrical", "Flooring", "Hardware", "HEATING, VENTING & COOLING", "KITCHEN", "Garden Center", "Lighting", "Outdoors", "Paint", "Plumbing", "Storage and Organization", "Tools"]
 
 async checkDepartments() {
   await expect(this.feedbackButton).toBeDisplayed()
   await browser.scroll(0, 3500)
+
   for (let i = 0; i < this.button.length; i++) {
-    // console.log(`Checking category: ${this.button[i]}`)
+    let currentButton = this.button[i]
+    let currentHeading = this.heading[i]
+    
     /* Spring Sale button has appeared on buttons so Blinds isn't there
-Adding a statement to skip it */
-if (this.button[i] === "Blinds & Window Treatments") {
-  const buttonExists = await this.buttonSelectors(this.button[i]).isExisting()
-  if(buttonExists == false) {
-    continue
+Adding a statement to handle it */
+if (this.button[i] === "Blinds & Window Treatments")  {
+  const blindsExists = await this.buttonSelectors(currentButton).isExisting()
+
+  //if Blinds doesn't exist use Spring Deals
+  if(!blindsExists) {
+    const springDealsExists = await this.buttonSelectors("Spring Deals").isExisting()
+
+    if (springDealsExists) {
+      currentButton = "Spring Deals"
+      currentHeading = "Spring Deals"
+    } else {
+      continue
+    }
   }
 } 
       await expect(this.feedbackButton).toBeDisplayed()  
-      await expect(this.buttonSelectors(this.button[i])).toBeDisplayed()
-      await this.buttonSelectors(this.button[i]).click()
-      await expect(this.headingSelectors(this.heading[i])).toBeDisplayed()
+      await expect(this.buttonSelectors(currentButton)).toBeDisplayed()
+      await this.buttonSelectors(currentButton).click()
+      await expect(this.headingSelectors(currentHeading)).toBeDisplayed()
       await browser.back()
     }
   }
