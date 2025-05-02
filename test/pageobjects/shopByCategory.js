@@ -24,8 +24,8 @@ async checkDepartments() {
     let currentButton = this.button[i]
     let currentHeading = this.heading[i]
     
-    /* Spring Sale button has appeared on buttons so Blinds isn't there
-Adding a statement to handle it */
+    //Spring Sale button has appeared on buttons so Blinds isn't there
+ 
 if (this.button[i] === "Blinds & Window Treatments")  {
   const blindsExists = await this.buttonSelectors(currentButton).isExisting()
 
@@ -55,7 +55,4 @@ if (this.button[i] === "Blinds & Window Treatments")  {
 
 }
   
-
-  
-
 export default new ShopByCategory();
