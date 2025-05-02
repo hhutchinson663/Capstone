@@ -25,7 +25,7 @@ class SavingsCenter extends Base {
     }
 
     savingsCenterFilter(MoreWaysToSaveOptions) {
-        return $(`//div[@data-component]/button//span[contains(text(),"Savings Center: ${MoreWaysToSaveOptions}")]`)
+        return $(`//div[@data-testid="Savings Center: ${MoreWaysToSaveOptions}"]`)
     }
 
     async checkSavingsCenterPage() { 
@@ -35,7 +35,7 @@ class SavingsCenter extends Base {
 
     async navigateToMoreWaysToSaveSection() {
         await this.checkSavingsCenterPage()
-        await browser.scroll(0,1550)
+        await browser.scroll(0,2250)
         await expect(this.moreWaysToSaveTitle).toBeDisplayed()
     }
 
