@@ -49,8 +49,29 @@ class SavingsCenter extends Base {
         await expect(this.bulkPricingTitle).toBeDisplayed()
     }
 
+    async checkSpecialBuys() {
+        await this.checkSavingsCenterPage()
+        await this.navigateToMoreWaysToSaveSection()
+        await this.specialBuyLearnMoreLink.click()
+        await this.checkSavingsCenterFilter('Special Buys')
+    }
+
+    async checkNewLowerPrices() {
+        await this.checkSavingsCenterPage()
+        await this.navigateToMoreWaysToSaveSection() 
+        await this.newLowerPriceLearnMoreLink.click()
+        await this.checkSavingsCenterFilter('New Lower Prices')
+    }
+
+    async checkBulkPricing() {
+        await this.checkSavingsCenterPage()
+        await this.navigateToMoreWaysToSaveSection()
+        await this.bulkPriceLearnMoreLink.click()
+        await this.checkBulkPricePage()
+    }
+
     open () {
-        return super.open('https://www.homedepot.com/c/Savings_Center');
+        return super.goTo('https://www.homedepot.com/c/Savings_Center');
     }
     
 }

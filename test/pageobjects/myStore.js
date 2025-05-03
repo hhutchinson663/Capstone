@@ -104,8 +104,19 @@ async checkWorkshop() {
      await expect(this.workshopHeading).toBeDisplayed()
 }
 
+async checkMyStore() {
+     await this.navigateToMyStore()
+     await this.checkMap()
+     await this.checkMyStoreHeadings()
+     await this.checkCurbside()
+     await this.navigateToMyStore()
+     await this.checkLocalAd()
+     await this.navigateToMyStore()
+     await this.checkWorkshop()
+}
+
      open () {
-          return super.open('https://www.homedepot.com/');
+          return super.goTo('https://www.homedepot.com/');
       } 
 }
 

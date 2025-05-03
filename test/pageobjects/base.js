@@ -9,7 +9,7 @@ export default class Base {
         return $('//h1[contains(text(),"SAVINGS CENTER")]')
     }
 
-        open(path) {
+        goTo(path) {
             return browser.url(`${path}`)
         }
 

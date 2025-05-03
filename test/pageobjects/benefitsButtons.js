@@ -4,7 +4,7 @@ import { expect } from '@wdio/globals'
 
 class BenefitsButtons extends Base {
    get healthWellnessTab() {
-    return $('[id="fusion-tab-health&wellness"]')
+    return $('[#fusion-tab-health&wellness]')
    }
 
    get financialPlanningTab() {
@@ -83,11 +83,6 @@ class BenefitsButtons extends Base {
     return $('//a[@aria-label="Learn More opens in new tab"]')
    }
 
-
-   open() {
-    return super.open('https://careers.homedepot.com/our-benefits');
-}
-
 async checkHealthWellnessTab() {
     await expect(this.healthWellnessTab).toBeDisplayed()
     await expect(this.healthInsuranceTitle).toBeDisplayed()
@@ -102,6 +97,7 @@ async checkHealthWellnessTab() {
 }
 
 async checkFinancialPlanningTab() {
+    await this.financialPlanningTab.click()
     await expect(this.title401k).toBeDisplayed()
     await expect(this.collegePlanningTitle).toBeDisplayed()
     await expect(this.tuitionReimbursementTitle).toBeDisplayed()
@@ -111,9 +107,27 @@ async checkFinancialPlanningTab() {
 }
 
 async checkDiscountsTab() {
+    await this.discountForAssociatesTab.click()
     await expect(this.gymTitle).toBeDisplayed()
     await expect(this.electronicsTitle).toBeDisplayed()
     await expect(this.foodAndGroceryTitle).toBeDisplayed()
+}
+
+async verifyOrangeLife(expectedURL) {
+    await this.learnMoreButton.click() 
+    const currentURL = await browser.getUrl()
+    await expect(currentURL).tobe(expectedURL)
+}
+
+async checkBenefitsButtons() {
+    await this.checkHealthWellnessTab()
+    await this.checkFinancialPlanningTab()
+    await this.checkDiscountsTab()
+    await this.verifyOrangeLife('https://learn.bswift.com/orangelife')
+}
+
+   open() {
+    return super.goTo('https://careers.homedepot.com/our-benefits');
 }
 
 }

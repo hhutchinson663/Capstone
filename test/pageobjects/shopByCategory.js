@@ -50,7 +50,7 @@ if (this.button[i] === "Blinds & Window Treatments")  {
   }
 
   open() {
-    return super.open('https://www.homedepot.com/');
+    return super.goTo('https://www.homedepot.com/');
   }
 
 }

@@ -3,27 +3,18 @@ import SavingsCenter from '../pageobjects/savingsCenter.js'
 describe('Check Savings Center Tests', () => {
 
     it('Special Buys', async() => {
-        await SavingsCenter.open()
-        await SavingsCenter.checkSavingsCenterPage()
-        await SavingsCenter.navigateToMoreWaysToSaveSection()
-        await SavingsCenter.specialBuyLearnMoreLink.click()
-        await SavingsCenter.checkSavingsCenterFilter('Special Buys')
+        await SavingsCenter.goTo()
+        await SavingsCenter.checkSpecialBuys()
     })
 
     it('New Lower Price', async() => {
-        await SavingsCenter.open()
-        await SavingsCenter.checkSavingsCenterPage()
-        await SavingsCenter.navigateToMoreWaysToSaveSection() 
-        await SavingsCenter.newLowerPriceLearnMoreLink.click()
-        await SavingsCenter.checkSavingsCenterFilter('New Lower Prices')
+        await SavingsCenter.goTo()
+        await SavingsCenter.checkNewLowerPrices
     })
 
     it('Bulk Pricing', async() => {
-        await SavingsCenter.open()
-        await SavingsCenter.checkSavingsCenterPage()
-        await SavingsCenter.navigateToMoreWaysToSaveSection()
-        await SavingsCenter.bulkPriceLearnMoreLink.click()
-        await SavingsCenter.checkBulkPricePage()
+        await SavingsCenter.goTo()
+        await SavingsCenter.checkBulkPricing()
     })
 
 })
