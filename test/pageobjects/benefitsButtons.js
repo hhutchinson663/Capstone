@@ -64,15 +64,13 @@ async verifyOrangeLife(expectedURL) {
 }
 
 async checkBenefitsButtons() {
+    await this.goTo('https://careers.homedepot.com/our-benefits')
     await this.checkHealthWellnessTab()
     await this.checkFinancialPlanningTab()
     await this.checkDiscountsTab()
     await this.verifyOrangeLife('https://learn.bswift.com/orangelife')
 }
 
-   open() {
-    return super.goTo('https://careers.homedepot.com/our-benefits');
-}
 
 }
 

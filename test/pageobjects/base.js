@@ -9,8 +9,8 @@ export default class Base {
         return $('//h1[contains(text(),"SAVINGS CENTER")]')
     }
 
-        goTo(path) {
-            return browser.url(`${path}`)
+        goTo(endpoint) {
+            return browser.url(`${endpoint}`)
         }
 
 

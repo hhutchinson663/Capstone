@@ -25,7 +25,7 @@ class SavingsCenter extends Base {
     }
 
     savingsCenterFilter(MoreWaysToSaveOptions) {
-        return $(`//div[@data-testid="Savings Center: ${MoreWaysToSaveOptions}"]`)
+        return $(`(//button[.//span[contains(text(),"Savings Center: ${MoreWaysToSaveOptions}")]])[2]`)
     }
 
     async checkSavingsCenterPage() { 
@@ -41,6 +41,7 @@ class SavingsCenter extends Base {
 
     async checkSavingsCenterFilter(savingsCenterFilter) {
         await expect(this.feedbackButton).toBeDisplayed()
+        await this.savingsCenterFilter(savingsCenterFilter).waitForDisplayed({timeout: 10000})
         await expect(this.savingsCenterFilter(savingsCenterFilter)).toBeDisplayed()
     }
 
@@ -50,6 +51,7 @@ class SavingsCenter extends Base {
     }
 
     async checkSpecialBuys() {
+        await this.goTo('https://www.homedepot.com/c/Savings_Center')
         await this.checkSavingsCenterPage()
         await this.navigateToMoreWaysToSaveSection()
         await this.specialBuyLearnMoreLink.click()
@@ -57,6 +59,7 @@ class SavingsCenter extends Base {
     }
 
     async checkNewLowerPrices() {
+        await this.goTo('https://www.homedepot.com/c/Savings_Center')
         await this.checkSavingsCenterPage()
         await this.navigateToMoreWaysToSaveSection() 
         await this.newLowerPriceLearnMoreLink.click()
@@ -64,14 +67,11 @@ class SavingsCenter extends Base {
     }
 
     async checkBulkPricing() {
+        await this.goTo('https://www.homedepot.com/c/Savings_Center')
         await this.checkSavingsCenterPage()
         await this.navigateToMoreWaysToSaveSection()
         await this.bulkPriceLearnMoreLink.click()
         await this.checkBulkPricePage()
-    }
-
-    open () {
-        return super.goTo('https://www.homedepot.com/c/Savings_Center');
     }
     
 }

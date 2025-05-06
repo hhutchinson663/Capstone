@@ -12,21 +12,41 @@ headingSelectors(string) {
   return $(`//h1[contains(text(),"${string}")]`)
 }
 
-button = ["Special Buy of the Day", "Special Savings", "Appliances", "Bath & Faucets", "Blinds & Window Treatments", "Building Materials", "Cleaning", "Decor & Furniture", "Electrical", "Flooring & Area Rugs", "Hardware", "Heating & Cooling", "Kitchen", "Lawn & Garden", "Lighting & Ceiling Fans", "Outdoor Living", "Paint", "Plumbing", "Storage & Organization", "Tools"]
-
-heading = ["Special Buy of the Day", "SAVINGS CENTER", "Appliances", "Bath", "Window Treatments", "Building Materials", "Cleaning", "Home Decor", "Electrical", "Flooring", "Hardware", "HEATING, VENTING & COOLING", "KITCHEN", "Garden Center", "Lighting", "Outdoors", "Paint", "Plumbing", "Storage and Organization", "Tools"]
+departments = [
+  {button: "Special Buy of the Day", heading: "Special Buy of the Day"}, 
+  {button: "Special Savings", heading: "SAVINGS CENTER"}, 
+  {button: "Appliances", heading: "Appliances"},
+  {button: "Bath & Faucets", heading: "Bath"},
+  {button: "Blinds & Window Treatments", heading: "Window Treatments"},
+  {button: "Building Materials", heading: "Building Materials"},
+  {button: "Cleaning", heading: "Cleaning"},
+  {button: "Decor & Furniture", heading: "Home Decor"},
+  {button: "Electrical", heading: "Electrical"},
+  {button: "Flooring & Area Rugs", heading: "Flooring"},
+  {button: "Hardware", heading: "Hardware"},
+  {button: "Heating & Cooling", heading: "HEATING, VENTING & COOLING"},
+  {button: "Kitchen", heading: "KITCHEN"},
+  {button: "Lawn & Garden", heading: "Garden Center"},
+  {button: "Lighting & Ceiling Fans", heading: "Lighting"},
+  {button: "Outdoor Living", heading: "Outdoors"},
+  {button: "Paint", heading: "Paint"},
+  {button: "Plumbing", heading: "Plumbing"},
+  {button: "Storage & Organization", heading: "Storage and Organization"},
+  {button: "Tools", heading: "Tools"}
+]
 
 async checkDepartments() {
+  await this.goTo('https://www.homedepot.com/')
   await expect(this.feedbackButton).toBeDisplayed()
   await browser.scroll(0, 3500)
 
-  for (let i = 0; i < this.button.length; i++) {
-    let currentButton = this.button[i]
-    let currentHeading = this.heading[i]
+  for (const dept of this.departments) {
+    let currentButton = dept.button
+    let currentHeading = dept.heading
     
     //Spring Sale button has appeared on buttons so Blinds isn't there
  
-if (this.button[i] === "Blinds & Window Treatments")  {
+if (currentButton === "Blinds & Window Treatments")  {
   const blindsExists = await this.buttonSelectors(currentButton).isExisting()
 
   //if Blinds doesn't exist use Spring Deals
@@ -48,11 +68,6 @@ if (this.button[i] === "Blinds & Window Treatments")  {
       await browser.back()
     }
   }
-
-  open() {
-    return super.goTo('https://www.homedepot.com/');
-  }
-
 }
   
 export default new ShopByCategory();

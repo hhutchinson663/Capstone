@@ -70,41 +70,42 @@ async navigateToMyStore() {
      await expect(this.myStoreHeading).toBeDisplayed()
 }
 
-async checkMap() {
+     async checkMap() {
      await expect(this.map).toBeDisplayed()
      await this.zoomOutButton.click()
      await this.zoomOutButton.click()
      await this.zoomInButton.click()
-}
+     }
 
-async checkMyStoreHeadings() {
+     async checkMyStoreHeadings() {
      await expect(this.storeOpen).toBeDisplayed()
      await expect(this.currentlyShoppingHeading).toBeDisplayed()
      await expect(this.addressHeading).toBeDisplayed()
      await expect(this.hoursHeading).toBeDisplayed()
-}
+          }
 
-async checkCurbside() {
+     async checkCurbside() {
      await expect(this.curbsideButton).toBeDisplayed()
      await this.curbsideButton.click()
      await expect(this.curbsidePickupHeading).toBeDisplayed()
      await browser.back()
-}
+     }
 
-async checkLocalAd() {
+     async checkLocalAd() {
      await expect(this.localAdbutton).toBeDisplayed()
      await this.localAdbutton.click()
      await expect(this.localAdHeading).toBeDisplayed()
      await browser.back()
-}
+     }
 
-async checkWorkshop() {
+     async checkWorkshop() {
      await expect(this.workshopButton).toBeDisplayed()
      await this.workshopButton.click()
      await expect(this.workshopHeading).toBeDisplayed()
-}
+     }
 
-async checkMyStore() {
+     async checkMyStore() {
+     await this.goTo('https://www.homedepot.com/')
      await this.navigateToMyStore()
      await this.checkMap()
      await this.checkMyStoreHeadings()
@@ -113,11 +114,8 @@ async checkMyStore() {
      await this.checkLocalAd()
      await this.navigateToMyStore()
      await this.checkWorkshop()
-}
+     }
 
-     open () {
-          return super.goTo('https://www.homedepot.com/');
-      } 
 }
 
 export default new MyStore();
