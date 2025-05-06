@@ -1,6 +1,5 @@
-import { $, browser } from '@wdio/globals'
 import Base from './base.js';
-import { expect } from '@wdio/globals'
+
 
 class SavingsCenter extends Base {
     
@@ -8,20 +7,12 @@ class SavingsCenter extends Base {
         return $('//h2[contains(text(),"More Ways to Save")]')
     }
 
-    get specialBuyLearnMoreLink() {
-        return $('//a[@href="https://www.homedepot.com/b/Special-Buys/N-5yc1vZ1z11ao3"]')
-    }
-
-    get newLowerPriceLearnMoreLink() {
-        return $('//a[@href="https://www.homedepot.com/b/New-Lower-Prices/N-5yc1vZ1z11adg"]')
-    }
-
-    get bulkPriceLearnMoreLink() {
-        return $('//a[@aria-label="Navigate to Bulk Price"]')
-    }
-
     get bulkPricingTitle() {
         return $('//h1[contains(text(),"Bulk Pricing")]')
+    }
+
+    learnMoreLinks(linkOptions) {
+        return $(`//a[@aria-label="Navigate to ${linkOptions}"]`)
     }
 
     savingsCenterFilter(MoreWaysToSaveOptions) {
@@ -41,39 +32,22 @@ class SavingsCenter extends Base {
 
     async checkSavingsCenterFilter(savingsCenterFilter) {
         await expect(this.feedbackButton).toBeDisplayed()
-        await this.savingsCenterFilter(savingsCenterFilter).waitForDisplayed({timeout: 10000})
+        await this.savingsCenterFilter(savingsCenterFilter).waitForDisplayed()
         await expect(this.savingsCenterFilter(savingsCenterFilter)).toBeDisplayed()
     }
-
-    async checkBulkPricePage() {
-        await expect(this.feedbackButton).toBeDisplayed()
-        await expect(this.bulkPricingTitle).toBeDisplayed()
-    }
-
-    async checkSpecialBuys() {
-        await this.goTo('https://www.homedepot.com/c/Savings_Center')
-        await this.checkSavingsCenterPage()
-        await this.navigateToMoreWaysToSaveSection()
-        await this.specialBuyLearnMoreLink.click()
-        await this.checkSavingsCenterFilter('Special Buys')
-    }
-
-    async checkNewLowerPrices() {
-        await this.goTo('https://www.homedepot.com/c/Savings_Center')
-        await this.checkSavingsCenterPage()
-        await this.navigateToMoreWaysToSaveSection() 
-        await this.newLowerPriceLearnMoreLink.click()
-        await this.checkSavingsCenterFilter('New Lower Prices')
-    }
-
-    async checkBulkPricing() {
-        await this.goTo('https://www.homedepot.com/c/Savings_Center')
-        await this.checkSavingsCenterPage()
-        await this.navigateToMoreWaysToSaveSection()
-        await this.bulkPriceLearnMoreLink.click()
-        await this.checkBulkPricePage()
-    }
     
+    async checkSavingsCenterOptions(option) {
+        await this.goTo('https://www.homedepot.com/c/Savings_Center')
+        await this.checkSavingsCenterPage()
+        await this.navigateToMoreWaysToSaveSection()
+        await this.learnMoreLinks(option).click()
+            if( option === "Bulk Price") {
+                await expect(this.feedbackButton).toBeDisplayed()
+                await expect(this.bulkPricingTitle).toBeDisplayed()
+            } else {
+                await this.checkSavingsCenterFilter(option)
+            }   
+    }
 }
 
 export default new SavingsCenter();

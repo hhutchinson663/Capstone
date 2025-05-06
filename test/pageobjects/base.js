@@ -1,8 +1,9 @@
-import { browser } from '@wdio/globals'
+import { expect } from '@wdio/globals'
+import { $, browser } from '@wdio/globals'
 
 export default class Base {
     get feedbackButton() {
-        return $('//img[@src="https://pdx1.qualtrics.com/WRQualtricsSiteIntercept/Graphic.php?IM=IM_cUuBXdlHtK4XTdr"]')
+        return $('img[alt="Feedback Link"]')
     }
 
     get savingCenterTitle() {

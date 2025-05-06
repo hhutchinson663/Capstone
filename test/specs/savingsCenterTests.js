@@ -2,16 +2,15 @@ import SavingsCenter from '../pageobjects/savingsCenter.js'
 
 describe('Check Savings Center Tests', () => {
 
-    it('Special Buys', async() => {
-        await SavingsCenter.checkSpecialBuys()
-    })
+    it('Test special buys', async() => {
+        await SavingsCenter.checkSavingsCenterOptions("Special Buy")
+    }) 
+    
+    it('Test new lower price', async() => {
+        await SavingsCenter.checkSavingsCenterOptions("New Lower Price")
+    })  
 
-    it('New Lower Price', async() => {
-        await SavingsCenter.checkNewLowerPrices
-    })
-
-    it('Bulk Pricing', async() => {
-        await SavingsCenter.checkBulkPricing()
-    })
-
+    it('Test bulk price', async() => {
+        await SavingsCenter.checkSavingsCenterOptions("Bulk Price")
+    })    
 })
