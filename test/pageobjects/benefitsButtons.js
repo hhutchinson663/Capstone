@@ -2,6 +2,10 @@ import Base from './base.js';
 
 class BenefitsButtons extends Base {
 
+    get learnMoreButton() {
+    return $('//a[@aria-label="Learn More opens in new tab"]')
+    }
+
    benefitsTabSelector(tab) {
     return $(`#fusion-tab-${tab}`)
    }
@@ -16,10 +20,6 @@ class BenefitsButtons extends Base {
 
    additionalTabTitles(title) {
     return $(`//h3[contains(text(),"${title}")]`)
-   }
-
-   get learnMoreButton() {
-    return $('//a[@aria-label="Learn More opens in new tab"]')
    }
 
     async checkHealthWellnessTab() {
