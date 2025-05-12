@@ -10,6 +10,12 @@ export default class Base {
         return $('//h1[contains(text(),"SAVINGS CENTER")]')
     }
 
+    get liveChat() {
+        return $('//div[contains(@aria-label, "Open chat")]')
+    }
+
+  seasonalValue = "Super Savings"
+
         goTo(endpoint) {
             return browser.url(`${endpoint}`)
         }

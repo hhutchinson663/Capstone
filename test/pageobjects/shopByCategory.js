@@ -41,19 +41,16 @@ class ShopByCategory extends Base {
   for (const dept of this.departments) {
     let currentButton = dept.button
     let currentHeading = dept.heading
-    
-  //Spring Sale button has appeared on buttons so Blinds isn't there
  
   if (currentButton === "Blinds & Window Treatments")  {
   const blindsExists = await this.buttonSelectors(currentButton).isExisting()
 
-  //if Blinds doesn't exist use Spring Deals
   if(!blindsExists) {
-    const springDealsExists = await this.buttonSelectors("Spring Deals").isExisting()
-
-    if (springDealsExists) {
-      currentButton = "Spring Deals"
-      currentHeading = "Spring Deals"
+    const differentButtonExists = await this.buttonSelectors(this.seasonalValue).isExisting()
+   
+    if (differentButtonExists) {
+      currentButton = this.seasonalValue
+      currentHeading = this.seasonalValue
     } else {
       continue
     }
